@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <contextName>LogbackDemoApplication</contextName>
+
+    <property name="LOG_HOME" value="d:/var/log"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!--Encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default-->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--Rolling daily, but each file should be at most 100MB-->
+            <fileNamePattern>${LOG_HOME}/LogbackDemoApplication.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <!--Keep 60 days worth of history, but at most 10GB-->
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="cn.edu.hzau.logback.demo.Bar" level="warn"/>
+
+    <logger name="cn.edu.hzau.logback.demo.Foo">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
