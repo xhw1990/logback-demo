@@ -3,6 +3,7 @@
 
     <contextName>LogbackDemoApplication</contextName>
 
+    <!--Specify the home directory for log files-->
     <property name="LOG_HOME" value="d:/var/log"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
